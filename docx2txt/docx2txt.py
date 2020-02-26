@@ -85,6 +85,9 @@ def process(docx, img_dir=None):
 
     # get main text
     doc_xml = 'word/document.xml'
+    # simple but hacky bugfix for https://github.com/ankushshah89/python-docx2txt/issues/16
+    if doc_xml not in zipf.namelist() and 'word/document2.xml' in zipf.namelist():
+        doc_xml = 'word/document2.xml'
     text += xml2text(zipf.read(doc_xml))
 
     # get footer text
